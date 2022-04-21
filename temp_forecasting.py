@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
 
 data_dir = "jena_climate"
@@ -15,6 +16,9 @@ lines = lines[1:]
 
 print(headers)
 print(len(lines))
+
+jena_climate= pd.read_csv(fname)
+print(jena_climate.head(10))
 
 float_data = np.zeros((len(lines), len(headers)-1))
 for i, line in enumerate(lines):
@@ -55,6 +59,7 @@ def generator(data, lookback, delay, min_index, max_index,
             targets[j] = data[rows[j] + delay][1]
         yield samples, targets
 
+
 lookback = 1440
 step = 6
 delay = 144
@@ -87,7 +92,6 @@ test_gen = generator(float_data,
 
 val_steps = (300000 - 200001 - lookback)
 test_steps = (len(float_data) - 300001 - lookback)
-
 
 from keras.models import Sequential
 from keras import layers

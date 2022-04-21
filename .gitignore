@@ -155,3 +155,5 @@ jena_climate
 logs
 MNIST_data
 tmp
+kerasenv
+Stocks
